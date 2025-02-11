@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authenticity</title>
+    <style type='text/css'>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            color: #333;
+            line-height: 1.6;
+            background-color: #f7f9fc;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            /* background: linear-gradient(90deg, #111, #4a4a4a); */
+            background: linear-gradient(90deg, #1a1a1a, #4a4a4a);
+            width: 100%;
+            z-index: 1000; 
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .header .logo img {
+            width: 120px;
+        }
+
+
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s;
+
+        }
+
+        .navbar ul li a:hover {
+            background: #ffaf40;
+            color: #000;
+            transform: scale(1.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            color: #fff;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            overflow: hidden;
+        }
+
+        .hero .container {
+            text-align: center;
+            z-index: 2;
+            position: relative;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            animation: glow 1.5s infinite alternate;
+        }
+
+        .hero h1::after {
+            content: " 🚀";
+            font-size: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            line-height: 1.8;
+        }
+
+        .hero a.btn-primary {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background-color: #ffaf40;
+            color: #111;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 175, 64, 0.4);
+        }
+
+        .hero a.btn-primary:hover {
+            background-color: #fff;
+            transform: scale(1.1);
+        }
+
+        /* Glow Effect */
+        /* @keyframes glow {
+            from {
+                text-shadow: 0 0 15px #ffd700, 0 0 25px #ffd700;
+            }
+            to {
+                text-shadow: 0 0 25px #ffaf40, 0 0 50px #ffaf40;
+            }
+        } */
+
+        /* Floating Emoji Animation */
+        .floating-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            font-size: 2rem;
+            position: absolute;
+            animation: float 10s linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes float {
+            from {
+                transform: translateY(100vh) rotate(0deg);
+            }
+            to {
+                transform: translateY(-100vh) rotate(360deg);
+            }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 150px 40px;
+            background: linear-gradient(135deg, #f7f9fc, #dfe4ea);
+            text-align: center;
+        }
+
+        .features h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #333;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .features h2::after {
+            content: " 🌟";
+        }
+
+        .feature-grid {
+            display: grid;
+            justify-content: center;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) rotate(-2deg);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: #fff;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: #2575fc;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover .feature-icon {
+            color: #ffd700;
+        }
+
+        .feature-card p {
+            margin-top: 10px;
+            font-size: 1.1rem;
+        }
+
+        /* Upload Section */
+        .upload {
+            padding: 100px 30px;
+            background: #fff;
+            text-align: center;
+            position: relative;
+        }
+
+        .upload h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #111;
+        }
+
+        /* .upload h2::after {
+            content: " 📁";
+        } */
+
+        .upload-box {
+            max-width: 500px;
+            margin: 0 auto;
+            background: #f7f9fc;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .upload-label {
+            display: block;
+            padding: 15px;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            color: #555;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .upload-label:hover {
+            background: #ffaf40;
+            color: #111;
+            transform: scale(1.05);
+        }
+
+        .upload button {
+            padding: 10px 25px;
+            background: #2575fc;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(37, 117, 252, 0.4);
+        }
+
+        .upload button:hover {
+            background: #fff;
+            color: #2575fc;
+            transform: scale(1.1);
+        }
+
+        .upload-result {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        .footer {
+            background: #111;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+
+        .footer p span {
+            color: #ffaf40;
+            font-weight: bold;
+        }
+        /* Button Styling for "Check Authenticity Below" */
+        .upload button#checkImageBelow {
+            display: inline-block;
+            margin-top: 20px; /* Added space below the first button */
+            padding: 12px 30px;
+            background-color: #e7b416; /* Matching yellow-orange theme */
+            color: #111;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .upload button#checkImageBelow:hover {
+            background-color: #fff; /* Changes to white on hover */
+            transform: scale(1.1); /* Button grows on hover */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Slight shadow to enhance the effect */
+            color: #111;
+        }
+
+        .upload button#checkImageBelow:active {
+            transform: scale(0.98); /* Shrinks on click */
+        }
+        /* Features Section - Add space below */
+
+        /* About Section */
+        .about {
+            padding: 100px 30px;
+            background: #f4f4f4;
+            text-align: center;
+        }
+
+        .about h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .about p {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 40px;
+        }
+
+        /* Team Grid Layout */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        /* Team Member Styling */
+        .team-member {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Circular Images */
+        .team-photo {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            border: 5px solid #e7b416; /* Add a border color to match the theme */
+        }
+
+        /* Team Member Name and Role */
+        .team-member h3 {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            color: #333;
+        }
+
+        .team-member p {
+            font-size: 1rem;
+            color: #777;
+        }
+        /* Contact Section */
+        .contact {
+            padding: 100px 30px;
+            background: linear-gradient(135deg, #00c6ff, #0072ff); /* Gradient Background */
+            text-align: center;
+            color: #fff;
+        }
+
+        .contact h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .contact p {
+            font-size: 1.2rem;
+            color: #f0f0f0;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .contact-form label {
+            font-size: 1.1rem;
+            color: #333;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .contact-form input, 
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #0072ff; /* Blue border on focus */
+            outline: none;
+        }
+
+        /* Submit Button */
+        .contact-form button {
+            padding: 12px 20px;
+            background-color: #0072ff; /* Bright blue button */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            width: 100%;
+        }
+
+        .contact-form button:hover {
+            background-color: #0056b3; /* Dark blue on hover */
+            transform: scale(1.05);
+        }
+
+        /* Confirmation Message */
+        .confirmation-message {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #28a745; /* Green color for success */
+            display: none;
+        }
+
+        .confirmation-message.error {
+            color: #e74c3c; /* Red color for error */
+        }
+
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between; /* Space between logo and navbar */
+            align-items: center;
+            padding: 20px 40px; /* Increased padding for more space around */
+            background-color: #1a1a1a;  /* Dark background */
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Logo */
+        .header .logo {
+            width: 45px;  /* Slightly increased logo size */
+            height: 45px; /* Slightly increased logo size */
+            border-radius: 50%;
+            overflow: hidden;
+            position: absolute;  /* Position the logo absolutely */
+            right: 30px; /* More space on the right */
+        }
+
+        /* Logo Image */
+        .header .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            gap: 15px;  /* Reduced gap between navbar items */
+            align-items: center;
+            margin-left: 90px; /* More space between logo and navbar */
+        }
+
+        /* Navbar Menu List */
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+        }
+
+        /* Navbar Menu Links */
+        .navbar ul li a {
+            color: #fff;  /* White text for navbar items */
+            text-decoration: none;
+            padding: 8px 14px;  /* Reduced padding */
+            font-size: 14px;  /* Reduced font size */
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        /* Hero Section */
+        .hero {
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            justify-content: center; /* Horizontally center */
+            align-items: center; /* Vertically center */
+            flex-direction: column; /* Stack items vertically */
+            text-align: center; /* Center align text */
+            position: relative;
+            color: #fff;
+            background: linear-gradient(135deg, #111, #333);
+            overflow: hidden;
+        }
+
+        .hero .container {
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            animation: glow 1.5s infinite alternate;
+            margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            max-width: 600px; /* Prevent the text from being too wide */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-new {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero a.btn-primary {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #e7b416;
+            color: #111;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .hero a.btn-primary:hover {
+            background-color: #fff;
+            transform: scale(1.1);
+        }
+
+        /* Floating Particles */
+        .floating-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: float 5s infinite;
+        }
+
+        .particle:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            animation-delay: 1s;
+        }
+
+        .particle:nth-child(3) {
+            animation-delay: 2s;
+        }
+
+        .particle:nth-child(4) {
+            animation-delay: 3s;
+        }
+
+        .particle:nth-child(5) {
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) scale(0.8);
+            }
+            50% {
+                transform: translateY(-50px) scale(1);
+            }
+            100% {
+                transform: translateY(0) scale(0.8);
+            }
+        }
+
+        /* Navbar Hover Effects */
+        .navbar ul li a:hover {
+            background-color: #e7b416;  /* Accent yellow on hover */
+            color: #111;  /* Dark text color on hover */
+        }
+    </style>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script> -->
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <!-- <img src="logo2.png" alt="Astheticity Logo"> -->
+            </div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#upload">Upload</a></li>
+                    <li><a href="#about">About Us</a></li>
+                 
+                    
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <canvas id="backgroundCanvas"></canvas>
+        <div class="container">
+            <h1 class="hero-title">Authenticity</h1>
+            
+            <p class="hero-subtitle">Uncover the truth behind every image with our AI-driven analysis.</p>
+            <br>
+            <p class="hero-description">
+            <br>
+            <p class="hero-new">Be the changemaker 🌟</p>
+        
+            <a href="#upload" class="btn-primary">Check Your Image</a>
+            <div class="floating-particles">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2>Why Choose Us?</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <i class="feature-icon">🔍</i>
+                    <h3>AI Detection</h3>
+                    <p>Identify AI-generated or manipulated images.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="feature-icon">🧠</i>
+                    <h3>Deepfake Analysis</h3>
+                    <p>Unmask deepfake images and ensure authenticity.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="feature-icon">⚡</i>
+                    <h3>Real-time Results</h3>
+                    <p>Quick and accurate analysis reports.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upload Section -->
+    <section class="upload" id="upload">
+        <div class="container">
+            <h2>Upload Your Image</h2>
+            <p>Verify the authenticity of your image quickly and easily.</p>
+            <div class="upload-box">
+                <form action="/" method="POST" enctype="multipart/form-data" id="uploadForm">
+                    <label class="upload-label">
+                        <input type="file" name="image" id="imageUpload" accept="image/*" required>
+                        <span>Choose Image</span>
+                    </label>
+                    <button type="submit" class="btn-primary">Check Authenticity</button>
+                </form>
+                <div id="uploadResult" class="upload-result"></div>
+            </div>
+            {% if fake_confidence is not none %}
+                <h2>Prediction Result:</h2>
+                <p>The image is predicted to be "real" with a confidence of {{ real_confidence }}%.</p>
+                <p>The image is predicted to be "fake" with a confidence of {{ fake_confidence }}%.</p>
+            {% endif %}
+        </div>
+    </section>
+    </section>
+
+
+    <!-- About Section -->
+<section class="about" id="about">
+    <div class="container">
+        <h2>Meet Our Team</h2>
+        <p>We are a passionate team dedicated to bringing you the best image authenticity detection service.</p>
+        <div class="team-grid">
+            <!-- Team Member 1 -->
+            <div class="team-member">
+                <img src="static/image/Mukul.jpg" alt="Mukul Mishra" class="team-photo">
+                <h3>Mukul Mishra</h3>
+                <p>Frontend Developer and Machine Learning Engineer</p>
+            </div>
+            <!-- Team Member 2 -->
+            <div class="team-member">
+                <img src="static/image/Avish.jpg" alt="Avish Sinha" class="team-photo">
+                <h3>Avish Sinha</h3>
+                <p>Machine Learning Engineer</p>
+            </div>
+            <!-- Team Member 3 -->
+            <div class="team-member">
+                <img src="static/image/Vedant.jpg" alt="Vedant Deshmukh" class="team-photo">
+                <h3>Vedant Deshmukh</h3>
+                <p>Frontend Developer and UI/UX Designer</p>
+            </div>
+            <!-- Team Member 4 -->
+            <div class="team-member">
+                <img src="static/image/Ayush.jpg" alt="Ayush Singh" class="team-photo">
+                <h3>Ayush Singh</h3>
+                <p>UI/UX Designer and Backend Developer</p>
+            </div>
+            <!-- Team Member 5 -->
+            <div class="team-member">
+                <img src="static/image/ashish.jpg" alt="Ashish Vishwakarma" class="team-photo">
+                <h3>Ashish Vishwakarma</h3>
+                <p> Web Developer and UI/UX Designer</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Us Section -->
+<section class="contact" id="contact">
+    <div class="container">
+        <h2>Contact Us</h2>
+        <p>If you have any questions or need assistance, feel free to reach out to us. We'd love to hear from you!</p>
+        
+        <!-- Contact Form -->
+        <form id="contactForm" class="contact-form">
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" placeholder="Enter subject" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Your Message</label>
+                <textarea id="message" name="message" rows="5" placeholder="Enter your message" required></textarea>
+            </div>
+            <button type="submit" class="btn-primary">Send Message</button>
+        </form>
+
+        <!-- Confirmation message -->
+        <div id="confirmationMessage" class="confirmation-message"></div>
+    </div>
+</section>
+
+    
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Authenticity. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../final.js"></script>
+</body>
+</html>
